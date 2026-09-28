@@ -5,11 +5,10 @@ export interface SelectOption {
   label: string;
 }
 
-interface SelectProps
-  extends Omit<
-    SelectHTMLAttributes<HTMLSelectElement>,
-    "children" | "className" | "onChange" | "value"
-  > {
+interface SelectProps extends Omit<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  "children" | "className" | "onChange" | "value"
+> {
   label: string;
   options: SelectOption[];
   value: string;
@@ -25,7 +24,7 @@ export const Select = ({
   value,
   onValueChange,
   className = "",
-  labelClassName = "block text-sm font-semibold text-content",
+  labelClassName = "block text-sm font-semibold text-content dark:text-content-dark transition-text",
   hideLabel = false,
   ...selectProps
 }: SelectProps) => {
@@ -39,7 +38,7 @@ export const Select = ({
         id={generatedId}
         value={value}
         onChange={(event) => onValueChange(event.target.value)}
-        className={`mt-2 w-full rounded-xl border border-secondary-300 bg-surface px-4 py-3 font-normal outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-100 ${className}`}
+        className={`mt-2 w-full rounded-xl border border-secondary-300 transition-smooth bg-surface dark:bg-surface-dark px-4 py-3 font-normal outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-100 ${className}`}
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

@@ -27,7 +27,7 @@ export const useCartStore = create<CartState>()(
       setCount: (count) => set({ count: Math.max(0, count) }),
       addProduct: (product) =>
         set((state) => {
-          const existingItem = state.cartItems.find(
+          const existingItem = state.cartItems.some(
             (item) => item.product.id === product.id,
           );
 

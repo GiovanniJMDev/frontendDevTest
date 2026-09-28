@@ -33,7 +33,7 @@ export const Variants: Story = {
 
 export const ImageActions: Story = {
   render: () => (
-    <div className="flex gap-3 rounded-2xl bg-surface-muted p-4">
+    <div className="flex gap-3 rounded-2xl bg-surface-muted dark:bg-surface-muted-dark p-4">
       <Button variant="icon" size="md" aria-label="Añadir a favoritos">
         <Heart />
       </Button>

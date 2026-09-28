@@ -6,7 +6,7 @@ interface ProductGalleryProps {
 }
 
 export const ProductGallery = ({ product }: ProductGalleryProps) => (
-  <div className="flex min-h-105 items-center justify-center rounded-3xl bg-surface p-8 shadow-sm ring-1 ring-border">
+  <div className="flex min-h-105 transition-smooth items-center justify-center rounded-3xl bg-surface dark:bg-surface-dark p-8 shadow-sm ring-1 ring-border dark:ring-border-dark">
     <Img
       src={product.imgUrl}
       alt={`${product.brand} ${product.model}`}

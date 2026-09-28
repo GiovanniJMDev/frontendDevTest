@@ -37,7 +37,7 @@ export const Img = ({
   if (hasError) {
     return (
       <div
-        className="flex h-full w-full items-center justify-center bg-surface-muted p-4 text-center text-sm text-content-muted"
+        className="flex h-full w-full items-center justify-center bg-surface-muted dark:bg-surface-muted-dark p-4 text-center text-sm text-content-muted dark:text-content-muted-dark"
         role="img"
         aria-label={alt}
       >

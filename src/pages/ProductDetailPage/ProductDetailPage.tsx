@@ -14,13 +14,13 @@ export const ProductDetailPage = () => {
   if (!product) {
     return (
       <section className="py-12 text-center">
-        <h1 className="text-3xl font-bold text-content">Producto no encontrado</h1>
-        <p className="mt-3 text-content-muted">
+        <h1 className="text-3xl font-bold text-content dark:text-content-dark">Producto no encontrado</h1>
+        <p className="mt-3 text-content-muted dark:text-content-muted-dark">
           El producto que buscas no está disponible en los datos de prueba.
         </p>
         <Link
           to="/"
-          className="mt-6 inline-flex rounded-xl bg-primary-600 px-5 py-3 font-semibold text-white transition hover:bg-primary-700"
+          className="mt-6 inline-flex rounded-xl bg-primary-600 px-5 py-3 font-semibold text-white transition-smooth hover:bg-primary-700"
         >
           Volver al catálogo
         </Link>

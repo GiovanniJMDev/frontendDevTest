@@ -25,7 +25,7 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
   return (
     <div
       className={clsx(
-        "fixed inset-0 z-50 transition-all duration-300",
+        "fixed inset-0 z-50 transition-smooth",
         !isOpen && "pointer-events-none",
       )}
     >
@@ -43,14 +43,14 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
         aria-label="Carrito de compra"
         aria-modal="true"
         className={clsx(
-          "relative ml-auto flex h-full w-full max-w-md flex-col bg-surface p-0 shadow-2xl transition-transform duration-300",
+          "relative ml-auto flex h-full w-full max-w-md flex-col bg-surface dark:bg-surface-dark p-0 shadow-2xl transition-smooth",
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
-        <div className="flex items-center justify-between border-b border-border px-6 py-5">
+        <div className="flex items-center justify-between border-b border-border dark:border-border-dark px-6 py-5">
           <div>
-            <h2 className="text-xl font-bold text-content">Tu carrito</h2>
-            <p className="mt-1 text-sm text-content-muted">
+            <h2 className="text-xl font-bold text-content dark:text-content-dark">Tu carrito</h2>
+            <p className="mt-1 text-sm text-content-muted dark:text-content-muted-dark">
               {count} {count === 1 ? "producto" : "productos"}
             </p>
           </div>
@@ -58,7 +58,7 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
             type="button"
             aria-label="Cerrar carrito"
             onClick={onClose}
-            className="rounded-xl p-2 text-content-muted transition hover:bg-surface-muted hover:text-content focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+            className="rounded-xl p-2 text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-surface-muted dark:hover:bg-surface-muted-dark hover:text-content dark:hover:text-content-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
           >
             <X className="size-5" />
           </button>
@@ -70,14 +70,14 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
               <Heart className="size-4 text-primary-600" />
               <h3
                 id="liked-products-title"
-                className="font-semibold text-content"
+                className="font-semibold text-content dark:text-content-dark"
               >
                 Productos favoritos
               </h3>
             </div>
 
             {likedProducts.length === 0 ? (
-              <p className="rounded-xl bg-surface-muted px-4 py-3 text-sm text-content-muted">
+              <p className="rounded-xl bg-surface-muted dark:bg-surface-muted-dark px-4 py-3 text-sm text-content-muted dark:text-content-muted-dark">
                 Todavía no tienes productos favoritos.
               </p>
             ) : (
@@ -85,26 +85,28 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
                 {likedProducts.map((product) => (
                   <li
                     key={product.id}
-                    className="flex items-center gap-3 rounded-2xl border border-border p-3"
+                    className="flex items-center gap-3 rounded-2xl border border-border dark:border-border-dark p-3"
                   >
                     <img
                       src={product.imgUrl}
                       alt={`${product.brand} ${product.model}`}
-                      className="size-14 rounded-xl bg-surface-muted object-contain p-1"
+                      className="size-14 rounded-xl bg-surface-muted dark:bg-surface-muted-dark object-contain p-1"
                     />
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-content">
+                      <p className="truncate text-sm font-semibold text-content dark:text-content-dark">
                         {product.model}
                       </p>
-                      <p className="text-sm text-content-muted">
-                        {product.price ? `${product.price} €` : "Precio bajo consulta"}
+                      <p className="text-sm text-content-muted dark:text-content-muted-dark">
+                        {product.price
+                          ? `${product.price} €`
+                          : "Precio bajo consulta"}
                       </p>
                     </div>
                     <button
                       type="button"
                       aria-label={`Quitar ${product.model} de favoritos`}
                       onClick={() => toggleLiked(product)}
-                      className="rounded-lg p-2 text-primary-600 transition hover:bg-primary-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+                      className="rounded-lg p-2 text-primary-600 transition-smooth hover:bg-primary-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
                     >
                       <Heart className="size-4 fill-current" />
                     </button>
@@ -119,19 +121,19 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
               <ShoppingBag className="size-4 text-primary-600" />
               <h3
                 id="cart-products-title"
-                className="font-semibold text-content"
+                className="font-semibold text-content dark:text-content-dark"
               >
                 Productos en el carrito
               </h3>
             </div>
 
             {cartItems.length === 0 ? (
-              <div className="flex flex-col items-center rounded-xl bg-surface-muted px-4 py-8 text-center">
+              <div className="flex flex-col items-center rounded-xl bg-surface-muted dark:bg-surface-muted-dark px-4 py-8 text-center">
                 <ShoppingBag className="size-8 text-primary-600" />
-                <p className="mt-3 text-sm font-semibold text-content">
+                <p className="mt-3 text-sm font-semibold text-content dark:text-content-dark">
                   Tu carrito está vacío
                 </p>
-                <p className="mt-1 text-sm text-content-muted">
+                <p className="mt-1 text-sm text-content-muted dark:text-content-muted-dark">
                   Añade un producto para verlo aquí.
                 </p>
               </div>
@@ -140,30 +142,30 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
                 {cartItems.map(({ product, quantity }) => (
                   <li
                     key={product.id}
-                    className="flex items-center gap-3 rounded-2xl border border-border p-3"
+                    className="flex items-center gap-3 rounded-2xl border border-border dark:border-border-dark p-3"
                   >
                     <img
                       src={product.imgUrl}
                       alt={`${product.brand} ${product.model}`}
-                      className="size-14 rounded-xl bg-surface-muted object-contain p-1"
+                      className="size-14 rounded-xl bg-surface-muted dark:bg-surface-muted-dark object-contain p-1"
                     />
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-content">
+                      <p className="truncate text-sm font-semibold text-content dark:text-content-dark">
                         {product.model}
                       </p>
-                      <p className="text-sm text-content-muted">
+                      <p className="text-sm text-content-muted dark:text-content-muted-dark">
                         {quantity} {quantity === 1 ? "unidad" : "unidades"}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-semibold text-content">
+                      <p className="text-sm font-semibold text-content dark:text-content-dark">
                         {product.price ? `${product.price} €` : "Consultar"}
                       </p>
                       <button
                         type="button"
                         aria-label={`Eliminar ${product.model} del carrito`}
                         onClick={() => removeProduct(product.id)}
-                        className="mt-1 rounded-lg p-1.5 text-content-muted transition hover:bg-red-50 hover:text-danger focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+                        className="mt-1 rounded-lg p-1.5 text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-red-50 hover:text-danger focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
                       >
                         <Trash2 className="size-4" />
                       </button>
@@ -175,12 +177,12 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
           </section>
         </div>
 
-        <div className="border-t border-border p-6">
+        <div className="border-t border-border dark:border-border-dark p-6">
           <button
             type="button"
             disabled={count === 0}
             onClick={handleCheckout}
-            className="w-full rounded-xl bg-primary-600 px-5 py-3.5 font-semibold text-white transition hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-xl bg-primary-600 px-5 py-3.5 font-semibold text-white transition-smooth hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-200 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Continuar con la compra
           </button>

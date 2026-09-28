@@ -11,7 +11,9 @@ export const ProductPurchasePanel = ({
   product,
   onAddToCart,
 }: ProductPurchasePanelProps) => {
-  const [colorCode, setColorCode] = useState(product.options.colors[0]?.code ?? 0);
+  const [colorCode, setColorCode] = useState(
+    product.options.colors[0]?.code ?? 0,
+  );
   const [storageCode, setStorageCode] = useState(
     product.options.storages[0]?.code ?? 0,
   );
@@ -42,14 +44,14 @@ export const ProductPurchasePanel = ({
   };
 
   return (
-    <div className="rounded-3xl bg-surface p-7 shadow-sm ring-1 ring-border">
-      <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary-600">
+    <div className="rounded-3xl bg-surface dark:bg-surface-dark p-7 shadow-sm ring-1 ring-border dark:ring-border-dark transition-smooth">
+      <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary-600 transition-text">
         {product.brand}
       </p>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight text-content">
+      <h1 className="mt-3 text-3xl font-bold tracking-tight text-content dark:text-content-dark transition-text">
         {product.model}
       </h1>
-      <p className="mt-4 text-3xl font-bold text-content">
+      <p className="mt-4 text-3xl font-bold text-content dark:text-content-dark transition-text">
         {product.price ? formattedPrice : "Precio bajo consulta"}
       </p>
 
@@ -76,7 +78,7 @@ export const ProductPurchasePanel = ({
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-primary-600 px-5 py-3.5 font-semibold text-white transition hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200"
+          className="w-full rounded-xl bg-primary-600 px-5 py-3.5 font-semibold text-white transition-smooth hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200"
         >
           {added ? "Añadido al carrito ✓" : "Añadir al carrito"}
         </button>

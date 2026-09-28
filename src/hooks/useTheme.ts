@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 
 const THEME_STORAGE_KEY = "mobile-shop-theme";
 
@@ -28,7 +28,7 @@ const applyTheme = (theme: Theme) => {
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     applyTheme(theme);
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);

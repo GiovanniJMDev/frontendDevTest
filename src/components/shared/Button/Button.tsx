@@ -17,12 +17,12 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-primary-600 text-white shadow-sm hover:bg-primary-700 focus-visible:ring-primary-200",
   secondary:
-    "border border-border bg-surface text-content shadow-sm hover:bg-surface-muted focus-visible:ring-secondary-200",
+    "border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-content dark:text-content-dark shadow-sm hover:bg-surface-muted dark:hover:bg-surface-muted-dark focus-visible:ring-secondary-200",
   ghost:
-    "bg-transparent text-content-muted hover:bg-surface-muted focus-visible:ring-secondary-200",
+    "bg-transparent text-content-muted dark:text-content-muted-dark hover:bg-surface-muted dark:hover:bg-surface-muted-dark focus-visible:ring-secondary-200",
   danger:
     "bg-danger text-white shadow-sm hover:bg-danger/90 focus-visible:ring-danger/20",
-  icon: "bg-surface/90 text-content shadow-sm backdrop-blur hover:bg-surface focus-visible:ring-secondary-200",
+  icon: "bg-surface/90 dark:bg-surface-dark/90 text-content dark:text-content-dark shadow-sm backdrop-blur hover:bg-surface dark:hover:bg-surface-dark focus-visible:ring-secondary-200",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -55,7 +55,7 @@ export const Button = forwardRef(function Button(
       {...buttonProps}
       ref={ref}
       type={type}
-      className={`inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors focus-visible:outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50 duration-300 ${
+      className={`inline-flex items-center cursor-pointer justify-center gap-2 rounded-xl font-semibold transition-smooth focus-visible:outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50 ${
         isIconButton ? iconSizeClasses[size] : sizeClasses[size]
       } ${variantClasses[variant]} ${className}`}
     >

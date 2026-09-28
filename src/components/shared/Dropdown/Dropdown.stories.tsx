@@ -31,21 +31,21 @@ export const Default: Story = {
       <button
         type="button"
         role="menuitem"
-        className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary-700 hover:bg-surface-muted"
+        className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary-700 hover:bg-surface-muted dark:hover:bg-surface-muted-dark"
       >
         Más recientes
       </button>
       <button
         type="button"
         role="menuitem"
-        className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary-700 hover:bg-surface-muted"
+        className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary-700 hover:bg-surface-muted dark:hover:bg-surface-muted-dark"
       >
         Precio: menor a mayor
       </button>
       <button
         type="button"
         role="menuitem"
-        className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary-700 hover:bg-surface-muted"
+        className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary-700 hover:bg-surface-muted dark:hover:bg-surface-muted-dark"
       >
         Precio: mayor a menor
       </button>

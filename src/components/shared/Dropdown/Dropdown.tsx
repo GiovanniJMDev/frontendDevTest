@@ -65,7 +65,7 @@ export const Dropdown = ({
       {isOpen && (
         <div
           role="menu"
-          className={`absolute z-20 mt-2 min-w-48 rounded-xl border border-border bg-surface p-1.5 shadow-lg ${alignClasses[align]}`}
+          className={`absolute z-20 mt-2 min-w-48 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-1.5 shadow-lg ${alignClasses[align]}`}
         >
           {children}
         </div>

@@ -20,7 +20,7 @@ export interface BadgeProps {
 
 const variantClasses: Record<BadgeVariant, string> = {
   brand: "border-primary-200/80 bg-primary-50/90 text-primary-700",
-  neutral: "border-border/80 bg-surface-muted/90 text-content-muted",
+  neutral: "border-border/80 dark:border-border-dark/80 bg-surface-muted/90 dark:bg-surface-muted-dark/90 text-content-muted dark:text-content-muted-dark",
   secondary: "border-secondary-300/80 bg-secondary-100/90 text-secondary-700",
   success: "border-success/30 bg-success/10 text-success",
   warning: "border-warning/30 bg-warning/10 text-warning",
