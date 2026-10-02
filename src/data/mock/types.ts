@@ -44,8 +44,8 @@ export interface ProductDetail extends Product {
   externalMemory: string;
   internalMemory: string[];
   ram: string;
-  primaryCamera: string[];
-  secondaryCmera: string[];
+  primaryCamera: string | string[];
+  secondaryCmera: string | string[];
   speaker: string;
   audioJack: string;
   wlan: string[];

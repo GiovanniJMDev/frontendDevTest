@@ -4,6 +4,18 @@ interface ProductSpecificationsProps {
   product: ProductDetail;
 }
 
+const formatList = (value: string | string[] | null | undefined) => {
+  if (Array.isArray(value)) {
+    return value.join(" · ");
+  }
+
+  return value ?? "";
+};
+
+const formatWeight = (weight: string) => {
+  return /\s*g$/i.test(weight) ? weight : `${weight} g`;
+};
+
 export const ProductSpecifications = ({
   product,
 }: ProductSpecificationsProps) => {
@@ -14,12 +26,13 @@ export const ProductSpecifications = ({
     ["CPU", product.cpu],
     ["RAM", product.ram],
     ["Sistema operativo", product.os],
-    ["Resolución", product.displaySize],
+    ["Resolución", product.displayResolution],
+    ["Tamaño de pantalla", product.displaySize],
     ["Batería", product.battery],
-    ["Cámara principal", product.primaryCamera.join(" · ")],
-    ["Cámara frontal", product.secondaryCmera.join(" · ")],
+    ["Cámara principal", formatList(product.primaryCamera)],
+    ["Cámara frontal", formatList(product.secondaryCmera)],
     ["Dimensiones", product.dimentions],
-    ["Peso", `${product.weight} g`],
+    ["Peso", formatWeight(product.weight)],
   ];
 
   return (

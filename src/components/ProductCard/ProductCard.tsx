@@ -1,11 +1,10 @@
-import { useState, type MouseEvent } from "react";
+import { type MouseEvent } from "react";
 import { Link } from "react-router";
 import { HeartIcon, ShoppingCartPlusIcon } from "lucide-react";
-import { mockProductDetailsById, type Product } from "../../data/mock";
+import type { Product } from "../../data/mock";
 import { useCartStore } from "../../store/useCartStore";
 import { Button } from "../shared/Button/Button";
 import { Img } from "../shared/Img/Img";
-import { Select } from "../shared/Select/Select";
 
 interface ProductCardProps {
   product: Product;
@@ -37,23 +36,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     event.stopPropagation();
   };
 
-  const productDetails = mockProductDetailsById[product.id];
-  const colorOptions = productDetails?.options.colors ?? [];
-  const ramOptions = productDetails?.options.rams ?? [];
-  const colorSelectOptions = colorOptions.map((option) => ({
-    value: String(option.code),
-    label: option.name,
-  }));
-  const ramSelectOptions = ramOptions.map((option) => ({
-    value: String(option.code),
-    label: option.name,
-  }));
-  const [selectedColorCode, setSelectedColorCode] = useState(
-    colorOptions[0]?.code ?? 0,
-  );
-  const [selectedRamCode, setSelectedRamCode] = useState(
-    ramOptions[0]?.code ?? 0,
-  );
+  // const productDetails = mockProductDetailsById[product.id];
+  // const colorOptions = productDetails?.options.colors ?? [];
+  // const ramOptions = productDetails?.options.rams ?? [];
+  // const colorSelectOptions = colorOptions.map((option) => ({
+  //   value: String(option.code),
+  //   label: option.name,
+  // }));
+  // const ramSelectOptions = ramOptions.map((option) => ({
+  //   value: String(option.code),
+  //   label: option.name,
+  // }));
+  // const [selectedColorCode, setSelectedColorCode] = useState(
+  //   colorOptions[0]?.code ?? 0,
+  // );
+  // const [selectedRamCode, setSelectedRamCode] = useState(
+  //   ramOptions[0]?.code ?? 0,
+  // );
 
   return (
     <Link
@@ -71,7 +70,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
       <div className="flex w-full rounded-2xl">
         <div className="grid h-full w-full grid-cols-2 gap-2 rounded-b-2xl transition-smooth bg-surface-muted dark:bg-surface-muted-dark p-3">
-          <Select
+          {/* <Select
             label="Color"
             aria-label={`Seleccionar color para ${product.model}`}
             hideLabel
@@ -92,7 +91,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             onValueChange={(value) => setSelectedRamCode(Number(value))}
             labelClassName="block min-w-0"
             className="mt-0! min-w-0 rounded-lg! px-2! py-1! text-xs! focus:ring-2!"
-          />
+          /> */}
         </div>
         <div className="bg-surface-muted dark:bg-surface-muted-dark transition-smooth">
           <div className="flex justify-end gap-2 rounded-tl-xl transition-smooth bg-surface dark:bg-surface-dark pt-2 pl-2">
