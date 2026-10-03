@@ -1,8 +1,9 @@
 import { type MouseEvent } from "react";
 import { Link } from "react-router";
 import { HeartIcon, ShoppingCartPlusIcon } from "lucide-react";
-import type { Product } from "../../data/mock";
+import type { Product } from "../../types/product";
 import { useCartStore } from "../../store/useCartStore";
+import { Badge } from "../shared/Badge/Badge";
 import { Button } from "../shared/Button/Button";
 import { Img } from "../shared/Img/Img";
 
@@ -32,34 +33,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     addProduct(product);
   };
 
-  const stopCardNavigation = (event: MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-  };
-
-  // const productDetails = mockProductDetailsById[product.id];
-  // const colorOptions = productDetails?.options.colors ?? [];
-  // const ramOptions = productDetails?.options.rams ?? [];
-  // const colorSelectOptions = colorOptions.map((option) => ({
-  //   value: String(option.code),
-  //   label: option.name,
-  // }));
-  // const ramSelectOptions = ramOptions.map((option) => ({
-  //   value: String(option.code),
-  //   label: option.name,
-  // }));
-  // const [selectedColorCode, setSelectedColorCode] = useState(
-  //   colorOptions[0]?.code ?? 0,
-  // );
-  // const [selectedRamCode, setSelectedRamCode] = useState(
-  //   ramOptions[0]?.code ?? 0,
-  // );
-
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group grid grid-rows-[1fr_auto_auto] h-auto max-h-80 w-full overflow-hidden rounded-3xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-3 shadow-sm transition-smooth hover:border-primary-200 hover:shadow-lg"
+      className="group grid grid-rows-[1fr_auto_auto] h-auto max-h-80 w-full overflow-hidden rounded-3xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-3 shadow-sm transition-smooth hover:border-primary-200 dark:hover:border-primary-700 hover:shadow-lg"
     >
-      <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-t-2xl rounded-br-2xl bg-surface-muted dark:bg-surface-muted-dark p-4 transition-smooth">
+      <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-t-2xl rounded-br-2xl bg-surface-muted dark:bg-surface-muted-dark p-4 transition-smooth">
+        <Badge variant="brand" className="absolute left-3 top-3">
+          {product.brand}
+        </Badge>
         <Img
           src={product.imgUrl}
           alt={`${product.brand} ${product.model}`}
@@ -69,29 +51,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       <div className="flex w-full rounded-2xl">
-        <div className="grid h-full w-full grid-cols-2 gap-2 rounded-b-2xl transition-smooth bg-surface-muted dark:bg-surface-muted-dark p-3">
-          {/* <Select
-            label="Color"
-            aria-label={`Seleccionar color para ${product.model}`}
-            hideLabel
-            value={String(selectedColorCode)}
-            options={colorSelectOptions}
-            onClick={stopCardNavigation}
-            onValueChange={(value) => setSelectedColorCode(Number(value))}
-            labelClassName="block min-w-0"
-            className="mt-0! min-w-0 rounded-lg! px-2! py-1! text-xs! focus:ring-2!"
-          />
-          <Select
-            label="RAM"
-            aria-label={`Seleccionar RAM para ${product.model}`}
-            hideLabel
-            value={String(selectedRamCode)}
-            options={ramSelectOptions}
-            onClick={stopCardNavigation}
-            onValueChange={(value) => setSelectedRamCode(Number(value))}
-            labelClassName="block min-w-0"
-            className="mt-0! min-w-0 rounded-lg! px-2! py-1! text-xs! focus:ring-2!"
-          /> */}
+        <div className="flex h-full w-full items-center rounded-b-2xl transition-smooth bg-surface-muted dark:bg-surface-muted-dark p-3">
+          <p className="truncate text-lg font-bold text-content dark:text-content-dark transition-smooth">
+            {product.price ? `${product.price} €` : "Precio bajo consulta"}
+          </p>
         </div>
         <div className="bg-surface-muted dark:bg-surface-muted-dark transition-smooth">
           <div className="flex justify-end gap-2 rounded-tl-xl transition-smooth bg-surface dark:bg-surface-dark pt-2 pl-2">
@@ -102,10 +65,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               }
               aria-pressed={isLiked}
               onClick={handleLike}
-              className="aspect-square! rounded-xl! bg-surface-muted dark:bg-surface-muted-dark hover:bg-surface-muted-hover! dark:hover:bg-surface-muted-hover-dark! p-1!"
+              className="aspect-square! rounded-xl! bg-surface-muted! dark:bg-surface-muted-dark! hover:bg-surface-muted-hover! dark:hover:bg-surface-muted-hover-dark! p-1!"
             >
               <HeartIcon
-                className={`size-5 transition-smooth ${isLiked ? "fill-primary-600 text-primary-600" : "text-secondary-400"}`}
+                className={`size-5 transition-smooth ${isLiked ? "fill-primary-600 text-primary-600" : "fill-transparent text-secondary-400"}`}
               />
             </Button>
             <Button
@@ -120,13 +83,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </div>
 
-      <div className="flex h-fit w-full justify-between px-2 pt-3">
-        <h2 className="text-lg font-semibold text-content dark:text-content-dark transition-text">
+      <div className="h-fit w-full px-2 pt-3">
+        <h2 className="truncate text-lg font-semibold text-content dark:text-content-dark transition-smooth">
           {product.model}
         </h2>
-        <p className="text-lg font-bold text-content dark:text-content-dark transition-text">
-          {product.price ? `${product.price} €` : "Precio bajo consulta"}
-        </p>
       </div>
     </Link>
   );

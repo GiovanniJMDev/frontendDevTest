@@ -19,7 +19,8 @@ export interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  brand: "border-primary-200/80 bg-primary-50/90 text-primary-700",
+  brand:
+    "border-primary-200/80 dark:border-primary-800/80 bg-primary-50/90 dark:bg-primary-950/90 text-primary-700 dark:text-primary-300",
   neutral: "border-border/80 dark:border-border-dark/80 bg-surface-muted/90 dark:bg-surface-muted-dark/90 text-content-muted dark:text-content-muted-dark",
   secondary: "border-secondary-300/80 bg-secondary-100/90 text-secondary-700",
   success: "border-success/30 bg-success/10 text-success",
@@ -41,7 +42,7 @@ export const Badge = ({
   className = "",
 }: BadgeProps) => (
   <span
-    className={`inline-flex w-fit items-center gap-1.5 rounded-full border font-bold uppercase leading-none tracking-[0.12em] shadow-sm backdrop-blur-sm ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+    className={`inline-flex w-fit items-center gap-1.5 rounded-full border font-bold uppercase leading-none tracking-[0.12em] shadow-sm transition-smooth backdrop-blur-sm ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
   >
     {icon && (
       <span aria-hidden="true" className="inline-flex shrink-0">

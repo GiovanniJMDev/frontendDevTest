@@ -1,4 +1,4 @@
-import type { ProductDetail } from "../../data/mock";
+import type { ProductDetail } from "../../types/product";
 import { Img } from "../shared/Img/Img";
 
 interface ProductGalleryProps {

@@ -1,8 +1,9 @@
 import { Activity } from "react";
-import { Heart, ShoppingBag, Trash2, X } from "lucide-react";
+import { Heart, ShoppingBag, X } from "lucide-react";
 import { clsx } from "clsx";
 import { useNavigate } from "react-router";
 import { useCartStore } from "../../store/useCartStore";
+import { QuantityStepper } from "../shared/QuantityStepper/QuantityStepper";
 
 interface CartDrawerProps {
   count: number;
@@ -14,6 +15,7 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
   const navigate = useNavigate();
   const cartItems = useCartStore((state) => state.cartItems);
   const likedProducts = useCartStore((state) => state.likedProducts);
+  const addProduct = useCartStore((state) => state.addProduct);
   const removeProduct = useCartStore((state) => state.removeProduct);
   const toggleLiked = useCartStore((state) => state.toggleLiked);
 
@@ -58,7 +60,7 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
             type="button"
             aria-label="Cerrar carrito"
             onClick={onClose}
-            className="rounded-xl p-2 text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-surface-muted dark:hover:bg-surface-muted-dark hover:text-content dark:hover:text-content-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+            className="rounded-xl p-2 text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-surface-muted dark:hover:bg-surface-muted-dark hover:text-content dark:hover:text-content-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-300 dark:focus-visible:ring-primary-700"
           >
             <X className="size-5" />
           </button>
@@ -106,7 +108,7 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
                       type="button"
                       aria-label={`Quitar ${product.model} de favoritos`}
                       onClick={() => toggleLiked(product)}
-                      className="rounded-lg p-2 text-primary-600 transition-smooth hover:bg-primary-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+                      className="rounded-lg p-2 text-primary-600 transition-smooth hover:bg-primary-50 dark:hover:bg-primary-950 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-300 dark:focus-visible:ring-primary-700"
                     >
                       <Heart className="size-4 fill-current" />
                     </button>
@@ -153,22 +155,17 @@ export const CartDrawer = ({ count, isOpen, onClose }: CartDrawerProps) => {
                       <p className="truncate text-sm font-semibold text-content dark:text-content-dark">
                         {product.model}
                       </p>
-                      <p className="text-sm text-content-muted dark:text-content-muted-dark">
-                        {quantity} {quantity === 1 ? "unidad" : "unidades"}
-                      </p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm font-semibold text-content dark:text-content-dark">
+                    <div className="flex flex-col items-end gap-1">
+                      <p className="text-sm font-semibold tabular-nums text-content dark:text-content-dark">
                         {product.price ? `${product.price} €` : "Consultar"}
                       </p>
-                      <button
-                        type="button"
-                        aria-label={`Eliminar ${product.model} del carrito`}
-                        onClick={() => removeProduct(product.id)}
-                        className="mt-1 rounded-lg p-1.5 text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-red-50 hover:text-danger focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
-                      >
-                        <Trash2 className="size-4" />
-                      </button>
+                      <QuantityStepper
+                        quantity={quantity}
+                        label={product.model}
+                        onIncrease={() => addProduct(product)}
+                        onDecrease={() => removeProduct(product.id)}
+                      />
                     </div>
                   </li>
                 ))}

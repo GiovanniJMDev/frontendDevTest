@@ -20,7 +20,7 @@ export const Layout = () => {
             aria-controls="cart-drawer"
             aria-expanded={isCartOpen}
             onClick={() => setIsCartOpen(true)}
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-surface-muted dark:hover:bg-surface-muted-dark hover:text-primary-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-surface-muted dark:hover:bg-surface-muted-dark hover:text-primary-700 dark:hover:text-primary-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-300 dark:focus-visible:ring-primary-700"
           >
             <ShoppingBag className="size-5" />
             <span>Carrito ({cartCount})</span>

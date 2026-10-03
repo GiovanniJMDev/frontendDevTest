@@ -68,11 +68,19 @@
 }
 
 @utility transition-smooth {
-  @apply transition-all duration-150 ease-in-out;
+  transition-property:
+    color, background-color, border-color, fill, stroke, box-shadow, opacity,
+    translate, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 
-@utility transition-text {
-  @apply transition-colors duration-200 ease-linear;
+html {
+  background-color: var(--color-background);
+}
+
+html.dark {
+  background-color: var(--color-background-dark);
 }
 
 body {

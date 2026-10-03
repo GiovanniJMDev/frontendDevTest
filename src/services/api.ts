@@ -4,7 +4,7 @@ import type {
   Product,
   ProductDetail,
   ProductListResponse,
-} from "../data/mock/types";
+} from "../types/product";
 
 export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ?? "https://itx-frontend-test.onrender.com";

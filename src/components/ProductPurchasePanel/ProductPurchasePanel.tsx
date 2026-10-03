@@ -1,15 +1,21 @@
 import { useState, type FormEvent } from "react";
-import type { AddToCartRequest, ProductDetail } from "../../data/mock";
+import type { AddToCartRequest, ProductDetail } from "../../types/product";
+import { Badge } from "../shared/Badge/Badge";
+import { QuantityStepper } from "../shared/QuantityStepper/QuantityStepper";
 import { Select } from "../shared/Select/Select";
 
 interface ProductPurchasePanelProps {
   product: ProductDetail;
   onAddToCart: (request: AddToCartRequest) => void;
+  onRemoveFromCart: () => void;
+  quantity: number;
 }
 
 export const ProductPurchasePanel = ({
   product,
   onAddToCart,
+  onRemoveFromCart,
+  quantity,
 }: ProductPurchasePanelProps) => {
   const [colorCode, setColorCode] = useState(
     product.options.colors[0]?.code ?? 0,
@@ -37,21 +43,23 @@ export const ProductPurchasePanel = ({
     label: `${option.name}${option.priceModifier ? ` (+${option.priceModifier} €)` : ""}`,
   }));
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const addToCart = () => {
     onAddToCart({ id: product.id, colorCode, storageCode });
     setAdded(true);
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    addToCart();
+  };
+
   return (
     <div className="rounded-3xl bg-surface dark:bg-surface-dark p-7 shadow-sm ring-1 ring-border dark:ring-border-dark transition-smooth">
-      <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary-600 transition-text">
-        {product.brand}
-      </p>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight text-content dark:text-content-dark transition-text">
+      <Badge variant="brand">{product.brand}</Badge>
+      <h1 className="mt-3 text-3xl font-bold tracking-tight text-content dark:text-content-dark transition-smooth">
         {product.model}
       </h1>
-      <p className="mt-4 text-3xl font-bold text-content dark:text-content-dark transition-text">
+      <p className="mt-4 text-3xl font-bold text-content dark:text-content-dark transition-smooth">
         {product.price ? formattedPrice : "Precio bajo consulta"}
       </p>
 
@@ -76,12 +84,22 @@ export const ProductPurchasePanel = ({
           }}
         />
 
-        <button
-          type="submit"
-          className="w-full rounded-xl bg-primary-600 px-5 py-3.5 font-semibold text-white transition-smooth hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200"
-        >
-          {added ? "Añadido al carrito ✓" : "Añadir al carrito"}
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            className="min-w-0 flex-1 rounded-xl bg-primary-600 px-5 py-2 font-semibold text-white transition-smooth hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200"
+          >
+            {added ? "Añadido al carrito" : "Añadir al carrito"}
+          </button>
+          {quantity > 0 && (
+            <QuantityStepper
+              quantity={quantity}
+              label={product.model}
+              onIncrease={addToCart}
+              onDecrease={onRemoveFromCart}
+            />
+          )}
+        </div>
       </form>
     </div>
   );

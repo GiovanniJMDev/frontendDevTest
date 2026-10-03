@@ -1,5 +1,6 @@
-import { ArrowLeft, ShoppingBag, Trash2 } from "lucide-react";
+import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { Link } from "react-router";
+import { QuantityStepper } from "../../components/shared/QuantityStepper/QuantityStepper";
 import { useCartStore } from "../../store/useCartStore";
 
 const formatPrice = (price: string) => {
@@ -17,6 +18,7 @@ const formatPrice = (price: string) => {
 
 export const CheckoutPage = () => {
   const cartItems = useCartStore((state) => state.cartItems);
+  const addProduct = useCartStore((state) => state.addProduct);
   const removeProduct = useCartStore((state) => state.removeProduct);
 
   const total = cartItems.reduce((subtotal, { product, quantity }) => {
@@ -50,7 +52,7 @@ export const CheckoutPage = () => {
     <section className="mx-auto max-w-5xl space-y-8">
       <Link
         to="/"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 dark:hover:text-primary-300"
       >
         <ArrowLeft className="size-4" />
         Volver a productos
@@ -71,7 +73,7 @@ export const CheckoutPage = () => {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.4fr)]">
         <div className="rounded-3xl bg-surface dark:bg-surface-dark p-6 shadow-sm ring-1 ring-border dark:ring-border-dark">
           <h2 className="text-xl font-bold text-content dark:text-content-dark">Tu carrito</h2>
-          <ul className="mt-5 divide-y divide-border">
+          <ul className="mt-5 divide-y divide-border dark:divide-border-dark">
             {cartItems.map(({ product, quantity }) => (
               <li key={product.id} className="flex gap-4 py-4 first:pt-0 last:pb-0">
                 <img
@@ -82,22 +84,17 @@ export const CheckoutPage = () => {
                 <div className="min-w-0 flex-1">
                   <p className="text-sm text-content-muted dark:text-content-muted-dark">{product.brand}</p>
                   <h3 className="mt-1 font-semibold text-content dark:text-content-dark">{product.model}</h3>
-                  <p className="mt-2 text-sm text-content-muted dark:text-content-muted-dark">
-                    Cantidad: {quantity}
-                  </p>
                 </div>
                 <div className="flex flex-col items-end justify-between">
-                  <p className="font-semibold text-content dark:text-content-dark">
+                  <p className="font-semibold tabular-nums text-content dark:text-content-dark">
                     {formatPrice(product.price)}
                   </p>
-                  <button
-                    type="button"
-                    aria-label={`Eliminar ${product.model} del carrito`}
-                    onClick={() => removeProduct(product.id)}
-                    className="rounded-lg p-2 text-content-muted dark:text-content-muted-dark transition-smooth hover:bg-red-50 hover:text-danger focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
-                  >
-                    <Trash2 className="size-4" />
-                  </button>
+                  <QuantityStepper
+                    quantity={quantity}
+                    label={product.model}
+                    onIncrease={() => addProduct(product)}
+                    onDecrease={() => removeProduct(product.id)}
+                  />
                 </div>
               </li>
             ))}

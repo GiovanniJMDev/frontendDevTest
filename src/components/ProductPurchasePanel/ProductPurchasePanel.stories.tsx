@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { mockProductDetails } from "../../data/mock";
+import { storyProductDetail } from "../../../.storybook/fixtures";
 import { ProductPurchasePanel } from "./ProductPurchasePanel";
 
 const meta = {
@@ -12,7 +12,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    product: mockProductDetails[0],
+    product: storyProductDetail,
     onAddToCart: () => undefined,
+    onRemoveFromCart: () => undefined,
+    quantity: 1,
   },
 };

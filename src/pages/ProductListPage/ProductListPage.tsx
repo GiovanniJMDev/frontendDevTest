@@ -79,10 +79,10 @@ export const ProductListPage = () => {
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary-600">
             Colección destacada
           </p>
-          <h1 className="m-0 text-4xl font-bold tracking-tight text-content dark:text-content-dark transition-text">
+          <h1 className="m-0 text-4xl font-bold tracking-tight text-content dark:text-content-dark transition-smooth">
             Encuentra tu próximo dispositivo
           </h1>
-          <p className="mt-3 max-w-2xl text-content-muted dark:text-content-muted-dark transition-text">
+          <p className="mt-3 max-w-2xl text-content-muted dark:text-content-muted-dark transition-smooth">
             Explora nuestra selección de smartphones actuales.
           </p>
         </div>

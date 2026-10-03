@@ -1,4 +1,4 @@
-import type { ProductDetail } from "../../data/mock";
+import type { ProductDetail } from "../../types/product";
 
 interface ProductSpecificationsProps {
   product: ProductDetail;
@@ -45,7 +45,7 @@ export const ProductSpecifications = ({
             className="grid grid-cols-[minmax(120px,0.6fr)_1fr] gap-4 border-b border-secondary-100 py-3 text-sm"
           >
             <dt className="font-semibold text-content-muted dark:text-content-muted-dark">{label}</dt>
-            <dd className="text-content dark:text-content-dark transition-text">{value || "—"}</dd>
+            <dd className="text-content dark:text-content-dark transition-smooth">{value || "—"}</dd>
           </div>
         ))}
       </dl>

@@ -2,7 +2,8 @@ import { Link, useParams } from "react-router";
 import { ProductGallery } from "../../components/ProductGallery/ProductGallery";
 import { ProductPurchasePanel } from "../../components/ProductPurchasePanel/ProductPurchasePanel";
 import { ProductSpecifications } from "../../components/ProductSpecifications/ProductSpecifications";
-import type { AddToCartRequest } from "../../data/mock";
+import type { AddToCartRequest } from "../../types/product";
+import { useAddToCart } from "../../hooks/useAddToCart";
 import { useProduct } from "../../hooks/useProduct";
 import { useCartStore } from "../../store/useCartStore";
 
@@ -10,6 +11,12 @@ export const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data: product, isPending, isError, error, refetch } = useProduct(id);
   const addProduct = useCartStore((state) => state.addProduct);
+  const { mutate: syncAddToCart } = useAddToCart();
+  const removeProduct = useCartStore((state) => state.removeProduct);
+  const quantity = useCartStore(
+    (state) =>
+      state.cartItems.find((item) => item.product.id === id)?.quantity ?? 0,
+  );
 
   if (!id) {
     return (
@@ -73,15 +80,17 @@ export const ProductDetailPage = () => {
     );
   }
 
-  const handleAddToCart = (_request: AddToCartRequest) => {
-    addProduct(product);
+  const handleAddToCart = (request: AddToCartRequest) => {
+    addProduct(product); // local primero: la UI nunca espera a la red
+    syncAddToCart(request); // la API se notifica en segundo plano
   };
+
 
   return (
     <section className="space-y-8">
       <Link
         to="/"
-        className="inline-flex items-center text-sm font-semibold text-primary-600 hover:text-primary-800"
+        className="inline-flex items-center text-sm font-semibold text-primary-600 hover:text-primary-800 dark:hover:text-primary-300"
       >
         ← Volver a productos
       </Link>
@@ -91,6 +100,8 @@ export const ProductDetailPage = () => {
         <ProductPurchasePanel
           product={product}
           onAddToCart={handleAddToCart}
+          onRemoveFromCart={() => removeProduct(product.id)}
+          quantity={quantity}
         />
       </div>
 
